@@ -82,14 +82,37 @@ public class UserDaoJDBC implements IUserDao{
         }
     }
 
-    @Override
-    public User gerUserById(int user_id) {
-        return null;
-    }
 
     @Override
     public User updateUser(User u) {
-        return null;
+        Connection c = cs.getConnection();
+
+        String sql = "update users " +
+                "set username = ?, " + //index 1
+                "firstName = ?, " + //index 2
+                "lastName = ?, " + //index 3
+                "email = ?, " +
+                "password = ?, " +
+                "role_id = ? " +
+                "where user_id = ?";
+        try{
+            PreparedStatement p = c.prepareStatement(sql);
+
+            p.setString(1, u.getUsername());
+            p.setString(2, u.getFirstName());
+            p.setString(3, u.getLastName());
+            p.setString(4, u.getEmail());
+            p.setString(5, u.getPassword());
+            p.setInt(6, u.getRole_id());
+            p.setInt(7, u.getUser_id());
+
+            p.execute();
+
+            return u;
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -108,4 +131,5 @@ public class UserDaoJDBC implements IUserDao{
             e.printStackTrace();
         }
     }
+
 }

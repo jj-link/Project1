@@ -12,7 +12,6 @@ public interface IUserDao {
     //read
     List<User> getAllUsers();
     User getUserByEmailOrUsername(String emailOrUsername);
-    User gerUserById(int user_id);
 
 
     //update
@@ -20,6 +19,8 @@ public interface IUserDao {
 
     //delete
     void deleteUserByEmailOrUsername(String emailOrUsername);
+
+
 
 
 }

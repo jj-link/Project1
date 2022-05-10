@@ -14,19 +14,21 @@ public class Driver {
 
     public static void main(String[] args) {
 
-        User createFinanceManager = new User("jj_link", "Joseph", "Link", "jj_link@email.com", "password", 1);
-        uDao.createUser(createFinanceManager);
+        User FinanceManager = new User("jj_link", "Joseph", "Link", "jj_link@email.com", "password", 1);
+        uDao.createUser(FinanceManager);
 
         User createEmployee = new User("j_doe", "John", "Doe", "jdoe@email.com", "pa$$word", 2);
         uDao.createUser(createEmployee);
 
-        User financeManager = uDao.getUserByEmailOrUsername("jj_link");
-        System.out.println(financeManager.toString());
+        User fm = uDao.getUserByEmailOrUsername("jj_link");
+        System.out.println(fm.toString());
 
         System.out.println(uDao.getAllUsers());
 
         //uDao.deleteUserByEmailOrUsername("jj_link@email.com");
         //System.out.print(uDao.getAllUsers());
 
+        User updatedUser = new User(fm.getUsername(), "Broseph", fm.getLastName(), fm.getEmail(), fm.getPassword(), fm.getRole_id());
+        uDao.updateUser(updatedUser);
     }
 }
