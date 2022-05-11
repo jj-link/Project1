@@ -18,12 +18,11 @@ public class Reimbursement {
     }
 
 
-    public Reimbursement(double amount, Date submittedDate, String description, int reimbursementAuthor, int reimbursementResolver, int reimbursementStatus, int reimbursementType) {
+    public Reimbursement(double amount, Date submittedDate, String description, int reimbursementAuthor, int reimbursementStatus, int reimbursementType) {
         this.amount = amount;
         this.submittedDate = submittedDate;
         this.description = description;
         this.reimbursementAuthor = reimbursementAuthor;
-        this.reimbursementResolver = reimbursementResolver;
         this.reimbursementStatus = reimbursementStatus;
         this.reimbursementType = reimbursementType;
     }
