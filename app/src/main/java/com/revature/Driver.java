@@ -20,24 +20,27 @@ public class Driver {
 
 
     public static void main(String[] args) {
-        /*
+
         User FinanceManager = new User("jj_link", "Joseph", "Link", "jj_link@email.com", "password", 1);
         uDao.createUser(FinanceManager);
 
+        /*
         User createEmployee = new User("j_doe", "John", "Doe", "jdoe@email.com", "pa$$word", 2);
         uDao.createUser(createEmployee);
 
-        User fm = uDao.getUserByEmailOrUsername("jj_link");
-        System.out.println(fm.toString());
+         */
 
-        System.out.println(uDao.getAllUsers());
+        User fm = uDao.getUserByEmailOrUsername("jj_link");
+        System.out.println("Testing get user by userNameorEmail:  " + fm.toString());
+
+        System.out.println("Testing Get all users:  " + uDao.getAllUsers());
 
         //uDao.deleteUserByEmailOrUsername("jj_link@email.com");
         //System.out.print(uDao.getAllUsers());
 
         User updatedUser = new User(fm.getUser_id(), fm.getUsername(), "Broseph", fm.getLastName(), fm.getEmail(), fm.getPassword(), fm.getRole_id());
-        System.out.println("Printing updated user: " + updatedUser.toString());
         uDao.updateUser(updatedUser);
+        System.out.println("Printing updated user: " + updatedUser.toString());
 
 
         //test create reimbursements
@@ -49,7 +52,7 @@ public class Driver {
         Reimbursement r2 = new Reimbursement(1000, d, "bought a Laptop", 2, 1, 4);
         rDao.createReimbursement(r2);
 
-         */
+
 
         //test read methods
 
@@ -67,16 +70,21 @@ public class Driver {
         List<Reimbursement> rList = rDao.getAllReimbursementsByEmployee(1);
         System.out.println("List of all Reimbursements by employee 1: " + rList);
 
-        /*
+
         //test update reimbursement
-        Date d = new Date(Instant.now().toEpochMilli());
+        d = new Date(Instant.now().toEpochMilli());
         Reimbursement updatedReimbursement = new Reimbursement(1000, d, "Bought some Yeezys", 1, 1, 4);
         updatedReimbursement.setId(1);
         rDao.update_Reimbursement(updatedReimbursement);
-        */
+
 
         //test resolve reimbursement
         rDao.resolveReimbursement(2,1,3);
+
+        //test get all resolved requests
+        resolvedList = new ArrayList<>();
+        resolvedList = rDao.getAllResolvedReimbursements();
+        System.out.println("List of all resolved requests: " + resolvedList);
 
         //test delete reimbursement
         rDao.deleteReimbursement(1);
