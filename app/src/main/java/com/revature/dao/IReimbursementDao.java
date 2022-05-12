@@ -15,7 +15,7 @@ public interface IReimbursementDao {
     List<Reimbursement> getAllReimbursementsByEmployee(int userId);
 
     //update
-    Reimbursement update_Reimbursement(Reimbursement r);
+    Reimbursement updateReimbursement(Reimbursement r);
     void resolveReimbursement(int reimbursementId, int resolverId, int newStatus);
 
     //delete

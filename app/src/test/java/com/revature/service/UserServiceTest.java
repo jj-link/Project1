@@ -9,6 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -95,6 +98,30 @@ public class UserServiceTest {
         User updatedUser = us.updateUserInfo(u);
 
         assertEquals(u.getUsername(), updatedUser.getUsername());
+    }
+
+    @Test
+    public void getAllUsersTest(){
+        List<User> userList = new ArrayList<>();
+        userList.add(new User("test", "John", "Doe", "test@mail.com", "password",2));
+        userList.add(new User("test2", "Jane", "Doe", "JDoe@email.com", "mypassword",1));
+
+        when(ud.getAllUsers()).thenReturn(userList);
+
+        List<User> returnedList = us.getAllUsers();
+
+        assertEquals(userList, returnedList);
+    }
+
+    @Test
+    public void DeleteUserTest(){
+
+
+        doNothing().when(ud).deleteUserByEmailOrUsername(any());
+
+        us.deleteUser("test");
+
+        verify(ud).deleteUserByEmailOrUsername(any());
     }
 
 }

@@ -75,7 +75,7 @@ public class Driver {
         d = new Date(Instant.now().toEpochMilli());
         Reimbursement updatedReimbursement = new Reimbursement(1000, d, "Bought some Yeezys", 1, 1, 4);
         updatedReimbursement.setId(1);
-        rDao.update_Reimbursement(updatedReimbursement);
+        rDao.updateReimbursement(updatedReimbursement);
 
 
         //test resolve reimbursement

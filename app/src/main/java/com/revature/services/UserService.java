@@ -4,6 +4,8 @@ import com.revature.dao.IUserDao;
 import com.revature.exceptions.LoginInfoIncorrectException;
 import com.revature.models.User;
 
+import java.util.List;
+
 public class UserService {
 
     private IUserDao ud;
@@ -31,6 +33,10 @@ public class UserService {
 
     public User updateUserInfo(User u){
         return ud.updateUser(u);
+    }
+
+    public List<User> getAllUsers(){
+        return ud.getAllUsers();
     }
 
     public void deleteUser(String usernameOrEmail){

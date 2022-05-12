@@ -113,7 +113,7 @@ public class ReimbursementDaoJDBC implements IReimbursementDao{
     }
 
     @Override
-    public Reimbursement update_Reimbursement(Reimbursement r) {
+    public Reimbursement updateReimbursement(Reimbursement r) {
         Connection c = cs.getConnection();
 
         String sql = "update reimbursements " +
