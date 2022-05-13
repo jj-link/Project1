@@ -5,6 +5,7 @@ package com.revature;
 
 import com.revature.dao.*;
 import com.revature.models.Reimbursement;
+import com.revature.models.ReimbursementResolver;
 import com.revature.models.User;
 import java.sql.Date;
 import java.time.Instant;
@@ -79,7 +80,7 @@ public class Driver {
 
 
         //test resolve reimbursement
-        rDao.resolveReimbursement(2,1,3);
+        rDao.resolveReimbursement(new ReimbursementResolver(1,2,3));
 
         //test get all resolved requests
         resolvedList = new ArrayList<>();

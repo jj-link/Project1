@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import com.revature.models.Reimbursement;
+import com.revature.models.ReimbursementResolver;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface IReimbursementDao {
 
     //update
     Reimbursement updateReimbursement(Reimbursement r);
-    void resolveReimbursement(int reimbursementId, int resolverId, int newStatus);
+    void  resolveReimbursement(ReimbursementResolver rr);
 
     //delete
     void deleteReimbursement(int reimbursementId);

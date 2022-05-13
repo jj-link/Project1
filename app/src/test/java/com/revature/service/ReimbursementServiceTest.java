@@ -2,7 +2,9 @@ package com.revature.service;
 
 import com.revature.dao.IReimbursementDao;
 import com.revature.dao.IUserDao;
+import com.revature.exceptions.InvalidAmountException;
 import com.revature.models.Reimbursement;
+import com.revature.models.ReimbursementResolver;
 import com.revature.models.User;
 import com.revature.services.ReimbursementService;
 import com.revature.services.UserService;
@@ -37,7 +39,7 @@ public class ReimbursementServiceTest {
     static ReimbursementService rs;
 
     @Test
-    public void createReimbursementTest(){
+    public void createReimbursementTestSuccess() throws InvalidAmountException {
 
         doNothing().when(rd).createReimbursement(any());
 
@@ -45,6 +47,14 @@ public class ReimbursementServiceTest {
 
         verify(rd).createReimbursement(any());
 
+    }
+
+    @Test(expected = InvalidAmountException.class)
+    public void createReimbursementInvalidAmount() throws InvalidAmountException {
+
+        doNothing().when(rd).createReimbursement(any());
+
+        rs.createReimbursement(-500, d, "Hotel room", 1, 1, 3);
     }
 
     @Test
@@ -71,17 +81,21 @@ public class ReimbursementServiceTest {
 
         List<Reimbursement> returnedList = rs.getAllResolvedRequests();
 
-        assertEquals(resolvedListList, returnedList);
+        assertEquals(resolvedList, returnedList);
 
     }
 
     @Test
     public void getAllReimbursementsByEmployee(){
         List<Reimbursement> employeeReimbursements = new ArrayList<>();
+        employeeReimbursements.add(new Reimbursement(100, d, "Hotel room", 1, 1, 3));
 
-        when(rd.getAllReimbursementsByEmployee(any())).thenReturn(employeeReimbursements);
 
-        List<Reimbursement> returnedList = rs.getAllReimbursementsByEmployee();
+        when(rd.getAllReimbursementsByEmployee(1)).thenReturn(employeeReimbursements);
+
+        int id = 1;
+
+        List<Reimbursement> returnedList = rs.getAllReimbursementsByEmployee(id);
 
         assertEquals(employeeReimbursements, returnedList);
     }
@@ -101,7 +115,25 @@ public class ReimbursementServiceTest {
 
     @Test
     public void resolveReimbursementTest(){
-         
+
+        doNothing().when(rd).resolveReimbursement(any());
+
+        ReimbursementResolver rr = new ReimbursementResolver(1,2,2);
+
+        rs.resolveReimbursement(rr);
+
+        verify(rd).resolveReimbursement(any());
+    }
+
+    @Test
+    public void deleteReimbursementTest(){
+
+        doNothing().when(rd).deleteReimbursement(1);
+
+        rs.deleteReimbursement(1);
+
+        verify(rd).deleteReimbursement(1);
+
     }
 
 }

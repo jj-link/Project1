@@ -7,6 +7,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.models.ReimbursementResolver;
 import com.revature.models.User;
 import com.revature.utils.ConnectionSingleton;
 
@@ -147,7 +148,7 @@ public class ReimbursementDaoJDBC implements IReimbursementDao{
     }
 
     @Override
-    public void resolveReimbursement(int reimbursementId, int resolverId, int newStatus){
+    public void resolveReimbursement(ReimbursementResolver rr){
 
         Connection c = cs.getConnection();
 
@@ -163,9 +164,9 @@ public class ReimbursementDaoJDBC implements IReimbursementDao{
             Date d = new Date(Instant.now().toEpochMilli());
 
             p.setDate(1, d);
-            p.setInt(2, resolverId);
-            p.setInt(3, newStatus);
-            p.setInt(4, reimbursementId);
+            p.setInt(2, rr.getResolverId());
+            p.setInt(3, rr.getStatus());
+            p.setInt(4, rr.getReimbursementId());
 
 
             p.execute();
