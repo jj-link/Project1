@@ -39,6 +39,14 @@ public class ReimbursementService {
         return rd.getAllReimbursementsByEmployee(userId);
     }
 
+    public List<Reimbursement> getAllPendingByUser(int userId){
+        return rd.getAllPendingRequestsByEmployee(userId);
+    }
+
+    public List<Reimbursement> getAllResolvedByUser(int userId){
+        return rd.getAllResolvedRequestsByEmployee(userId);
+    }
+
     public Reimbursement updateReimbursement(Reimbursement r){
         return rd.updateReimbursement(r);
     }

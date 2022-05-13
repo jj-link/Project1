@@ -29,9 +29,9 @@ public class ReimbursementDaoJDBC implements IReimbursementDao{
             p.setDouble(1, r.getAmount());
             p.setDate(2, r.getSubmittedDate());
             p.setString(3, r.getDescription());
-            p.setInt(4, r.getReimbursementAuthor());
-            p.setInt(5, r.getReimbursementStatus());
-            p.setInt(6, r.getReimbursementType());
+            p.setInt(4, r.getReimbursementAuthorId());
+            p.setInt(5, r.getReimbursementStatusId());
+            p.setInt(6, r.getReimbursementTypeId());
 
             p.execute();
         } catch(SQLException e){
@@ -114,6 +114,61 @@ public class ReimbursementDaoJDBC implements IReimbursementDao{
     }
 
     @Override
+    public List<Reimbursement> getAllPendingRequestsByEmployee(int userId){
+
+        Connection c = cs.getConnection();
+
+        String sql = "SELECT * from reimbursements where reimbursement_author = ? and reimbursement_status_id = ?";
+
+        try{
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1,userId);
+            ps.setInt(2, 1);
+            ResultSet rs = ps.executeQuery();
+            Reimbursement r = null;
+            List<Reimbursement> rList = new ArrayList<>();
+            while(rs.next()) {
+                r = new Reimbursement(rs.getInt(1), rs.getDouble(2),
+                        rs.getDate(3), rs.getDate(4), rs.getString(5),
+                        rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9));
+                rList.add(r);
+            }
+            return rList;
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    @Override
+    public List<Reimbursement> getAllResolvedRequestsByEmployee(int userId){
+        Connection c = cs.getConnection();
+
+        String sql = "SELECT * from reimbursements where reimbursement_author = ? and (reimbursement_status_id = ? or reimbursement_status_id = ?)";
+
+        try{
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1,userId);
+            ps.setInt(2, 2);
+            ps.setInt(3, 3);
+            ResultSet rs = ps.executeQuery();
+            Reimbursement r = null;
+            List<Reimbursement> rList = new ArrayList<>();
+            while(rs.next()) {
+                r = new Reimbursement(rs.getInt(1), rs.getDouble(2),
+                        rs.getDate(3), rs.getDate(4), rs.getString(5),
+                        rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9));
+                rList.add(r);
+            }
+            return rList;
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public Reimbursement updateReimbursement(Reimbursement r) {
         Connection c = cs.getConnection();
 
@@ -132,9 +187,9 @@ public class ReimbursementDaoJDBC implements IReimbursementDao{
             p.setDouble(1, r.getAmount());
             p.setDate(2, r.getSubmittedDate());
             p.setString(3, r.getDescription());
-            p.setInt(4, r.getReimbursementAuthor());
-            p.setInt(5, r.getReimbursementStatus());
-            p.setInt(6, r.getReimbursementType());
+            p.setInt(4, r.getReimbursementAuthorId());
+            p.setInt(5, r.getReimbursementStatusId());
+            p.setInt(6, r.getReimbursementTypeId());
             p.setInt(7, r.getId());
 
             p.execute();

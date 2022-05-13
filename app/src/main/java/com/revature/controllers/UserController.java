@@ -75,7 +75,7 @@ public class UserController {
 
             List<User> allUsers = uServ.getAllUsers();
             ctx.status(200);
-            ctx.result("" + userList);
+            ctx.result(om.writeValueAsString(allUsers));
         } else{
             ctx.status(404);
             ctx.result("You did something weird");
@@ -84,13 +84,15 @@ public class UserController {
 
     public Handler handleUpdateUser = (ctx) ->{
         User u = om.readValue(ctx.body(), User.class);
-        if(ctx.req.getSession().getAttribute("username").equals(u.getUsername())){
+        if(ctx.req.getSession().getAttribute("username") == null ||
+                !ctx.req.getSession().getAttribute("username").equals(u.getUsername())) {
+            ctx.status(401);
+            ctx.result("You must be logged in as the correct user to update user info");
+        }
+        else if(ctx.req.getSession().getAttribute("username").equals(u.getUsername())){
             u = uServ.updateUserInfo(u);
             ctx.status(200);
             ctx.result("User info updated successfully");
-        } else {
-            ctx.status(401);
-            ctx.result("You must be logged in as the correct user to update user info");
         }
     };
     

@@ -14,6 +14,8 @@ public interface IReimbursementDao {
     List<Reimbursement> getAllPendingReimbursements();
     List<Reimbursement> getAllResolvedReimbursements();
     List<Reimbursement> getAllReimbursementsByEmployee(int userId);
+    List<Reimbursement> getAllPendingRequestsByEmployee(int userId);
+    List<Reimbursement> getAllResolvedRequestsByEmployee(int userId);
 
     //update
     Reimbursement updateReimbursement(Reimbursement r);

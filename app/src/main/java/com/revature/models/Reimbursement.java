@@ -9,34 +9,72 @@ public class Reimbursement {
     private Date submittedDate;
     private Date resolvedDate;
     private String description;
-    private int reimbursementAuthor;
-    private int reimbursementResolver;
-    private int reimbursementStatus;
-    private int reimbursementType;
+    private int reimbursementAuthorId;
+    private int reimbursementResolverId;
+    private int reimbursementStatusId;
+    private int reimbursementTypeId;
+
+    private String reimbursementStatus;
+    private String reimbursementType;
 
     public Reimbursement() {
     }
 
 
-    public Reimbursement(double amount, Date submittedDate, String description, int reimbursementAuthor, int reimbursementStatus, int reimbursementType) {
+    public Reimbursement(double amount, Date submittedDate, String description, int reimbursementAuthorId, int reimbursementStatusId, int reimbursementTypeId) {
         this.amount = amount;
         this.submittedDate = submittedDate;
         this.description = description;
-        this.reimbursementAuthor = reimbursementAuthor;
-        this.reimbursementStatus = reimbursementStatus;
-        this.reimbursementType = reimbursementType;
+        this.reimbursementAuthorId = reimbursementAuthorId;
+        this.reimbursementStatusId = reimbursementStatusId;
+        this.reimbursementTypeId = reimbursementTypeId;
+
+        if(reimbursementStatusId == 1){
+            this.reimbursementStatus = "Pending";
+        } else if(reimbursementStatusId == 2) {
+            this.reimbursementStatus = "Approved";
+        } else if(reimbursementStatusId == 3) {
+            this.reimbursementStatus = "Denied";
+        }
+        if(reimbursementTypeId == 1){
+            this.reimbursementType = "Lodging";
+        } else if(reimbursementTypeId == 2){
+            this.reimbursementType = "Food";
+        } else if(reimbursementTypeId == 3){
+            this.reimbursementType = "Travel";
+        } else if(reimbursementTypeId == 4){
+            this.reimbursementType = "Other";
+        }
+
     }
 
-    public Reimbursement(int id, double amount, Date submittedDate, Date resolvedDate, String description, int reimbursementAuthor, int reimbursementResolver, int reimbursementStatus, int reimbursementType) {
+    public Reimbursement(int id, double amount, Date submittedDate, Date resolvedDate, String description, int reimbursementAuthorId, int reimbursementResolverId, int reimbursementStatusId, int reimbursementTypeId) {
         this.id = id;
         this.amount = amount;
         this.submittedDate = submittedDate;
         this.resolvedDate = resolvedDate;
         this.description = description;
-        this.reimbursementAuthor = reimbursementAuthor;
-        this.reimbursementResolver = reimbursementResolver;
-        this.reimbursementStatus = reimbursementStatus;
-        this.reimbursementType = reimbursementType;
+        this.reimbursementAuthorId = reimbursementAuthorId;
+        this.reimbursementResolverId = reimbursementResolverId;
+        this.reimbursementStatusId = reimbursementStatusId;
+        this.reimbursementTypeId = reimbursementTypeId;
+
+        if(reimbursementStatusId == 1){
+            this.reimbursementStatus = "Pending";
+        } else if(reimbursementStatusId == 2) {
+            this.reimbursementStatus = "Approved";
+        } else if(reimbursementStatusId == 3) {
+            this.reimbursementStatus = "Denied";
+        }
+        if(reimbursementTypeId == 1){
+            this.reimbursementType = "Lodging";
+        } else if(reimbursementTypeId == 2){
+            this.reimbursementType = "Food";
+        } else if(reimbursementTypeId == 3){
+            this.reimbursementType = "Travel";
+        } else if(reimbursementTypeId == 4){
+            this.reimbursementType = "Other";
+        }
     }
 
     public int getId() {
@@ -79,37 +117,54 @@ public class Reimbursement {
         this.description = description;
     }
 
-    public int getReimbursementAuthor() {
-        return reimbursementAuthor;
+    public int getReimbursementAuthorId() {
+        return reimbursementAuthorId;
     }
 
-    public void setReimbursementAuthor(int reimbursementAuthor) {
-        this.reimbursementAuthor = reimbursementAuthor;
+    public void setReimbursementAuthorId(int reimbursementAuthorId) {
+        this.reimbursementAuthorId = reimbursementAuthorId;
     }
 
-    public int getReimbursementResolver() {
-        return reimbursementResolver;
+    public int getReimbursementResolverId() {
+        return reimbursementResolverId;
     }
 
-    public void setReimbursementResolver(int reimbursementResolver) {
-        this.reimbursementResolver = reimbursementResolver;
+    public void setReimbursementResolverId(int reimbursementResolverId) {
+        this.reimbursementResolverId = reimbursementResolverId;
     }
 
-    public int getReimbursementStatus() {
+    public int getReimbursementStatusId() {
+        return reimbursementStatusId;
+    }
+
+    public void setReimbursementStatusId(int reimbursementStatusId) {
+        this.reimbursementStatusId = reimbursementStatusId;
+    }
+
+    public int getReimbursementTypeId() {
+        return reimbursementTypeId;
+    }
+
+    public void setReimbursementTypeId(int reimbursementTypeId) {
+        this.reimbursementTypeId = reimbursementTypeId;
+    }
+
+    public String getReimbursementStatus() {
         return reimbursementStatus;
     }
 
-    public void setReimbursementStatus(int reimbursementStatus) {
+    public void setReimbursementStatus(String reimbursementStatus) {
         this.reimbursementStatus = reimbursementStatus;
     }
 
-    public int getReimbursementType() {
+    public String getReimbursementType() {
         return reimbursementType;
     }
 
-    public void setReimbursementType(int reimbursementType) {
+    public void setReimbursementType(String reimbursementType) {
         this.reimbursementType = reimbursementType;
     }
+
 
     @Override
     public String toString() {
@@ -119,10 +174,12 @@ public class Reimbursement {
                 ", submittedDate=" + submittedDate +
                 ", resolvedDate=" + resolvedDate +
                 ", description='" + description + '\'' +
-                ", reimbursementAuthor=" + reimbursementAuthor +
-                ", reimbursementResolver=" + reimbursementResolver +
-                ", reimbursementStatus=" + reimbursementStatus +
-                ", reimbursementType=" + reimbursementType +
+                ", reimbursementAuthorId=" + reimbursementAuthorId +
+                ", reimbursementResolverId=" + reimbursementResolverId +
+                ", reimbursementStatusId=" + reimbursementStatusId +
+                ", reimbursementTypeId=" + reimbursementTypeId +
+                ", reimbursementStatus='" + reimbursementStatus + '\'' +
+                ", reimbursementType='" + reimbursementType + '\'' +
                 '}';
     }
 }

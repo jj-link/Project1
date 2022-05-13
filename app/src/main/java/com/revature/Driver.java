@@ -53,6 +53,12 @@ public class Driver {
             });
             path("reimbursements", () -> {
                 post("/createRequest", rc.handleCreateRequest);
+                post("/resolveRequest", rc.handleResolveRequest);
+                get("/getAllPendingByUser", rc.handleGetAllPendingByUser);
+                get("/getAllResolvedByUser", rc.handleGetAllResolvedByUser);
+                get("/getAllPending", rc.handleGetAllPending);
+                get("/getAllResolved", rc.handleGetAllResolved);
+                get("/getAllRequestsByEmployee/{id}", rc.handleGetAllRequestsByEmployee);
             });
 
 

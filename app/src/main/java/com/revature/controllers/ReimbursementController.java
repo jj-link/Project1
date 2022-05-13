@@ -7,6 +7,8 @@ import com.revature.models.ReimbursementResolver;
 import com.revature.services.ReimbursementService;
 import io.javalin.http.Handler;
 
+import java.util.List;
+
 public class ReimbursementController {
 
     private ReimbursementService rServ;
@@ -20,7 +22,6 @@ public class ReimbursementController {
     public Handler handleCreateRequest = (ctx) -> {
 
         ReimbursementCreator rc = om.readValue(ctx.body(), ReimbursementCreator.class);
-        int author_id = (int) ctx.req.getSession().getAttribute("user_id");
 
         if(ctx.req.getSession().getAttribute("role_id") == null){
             ctx.status(403);
@@ -28,9 +29,10 @@ public class ReimbursementController {
         }
         else if(rc.getAmount() <= 0){
             ctx.status(409);
-            ctx.result("amount must be > 0");
+            ctx.result("Reimbursement amount must be > 0");
         }
         else {
+            int author_id = (int) ctx.req.getSession().getAttribute("user_id");
             rServ.createReimbursement(rc, author_id);
             ctx.status(201);
             ctx.result("Reimbursement request successfully created");
@@ -41,16 +43,79 @@ public class ReimbursementController {
     public Handler handleResolveRequest = (ctx) -> {
 
         ReimbursementResolver rr = om.readValue(ctx.body(), ReimbursementResolver.class);
-
         if((ctx.req.getSession().getAttribute("role_id") == null) ||
                 (ctx.req.getSession().getAttribute("role_id").equals(2))) {
 
             ctx.status(403);
             ctx.result("Must be logged in as Manager to resolve reimbursement request");
+
         } else if (ctx.req.getSession().getAttribute("role_id").equals(1)){
 
+            int resolverId = (int) ctx.req.getSession().getAttribute("user_id");
+            rr.setResolverId(resolverId);
+            rServ.resolveReimbursement(rr);
+            ctx.status(200);
+            ctx.result("Reimbursement request resolved successfully");
         }
 
+    };
+
+    public Handler handleGetAllPendingByUser = (ctx) -> {
+        if(ctx.req.getSession().getAttribute("role_id") == null){
+            ctx.status(403);
+            ctx.result("Must be logged in to view your requests");
+        }else {
+            int userId = (int) ctx.req.getSession().getAttribute("user_id");
+            List<Reimbursement> allPending = rServ.getAllPendingByUser(userId);
+            ctx.status(200);
+            ctx.result(om.writeValueAsString(allPending));
+        }
+    };
+
+    public Handler handleGetAllResolvedByUser = (ctx) -> {
+        if(ctx.req.getSession().getAttribute("role_id") == null){
+            ctx.status(403);
+            ctx.result("Must be logged in to view your requests");
+        }else {
+            int userId = (int) ctx.req.getSession().getAttribute("user_id");
+            List<Reimbursement> allResolved = rServ.getAllResolvedByUser(userId);
+            ctx.status(200);
+            ctx.result(om.writeValueAsString(allResolved));
+        }
+    };
+
+    public Handler handleGetAllPending = (ctx) -> {
+        if (ctx.req.getSession().getAttribute("role_id") == null) {
+            ctx.status(403);
+            ctx.result("Must be logged in to view your requests");
+        } else {
+            List<Reimbursement> allPending = rServ.getAllPendingRequests();
+            ctx.status(200);
+            ctx.result(om.writeValueAsString(allPending));
+        }
+    };
+
+    public Handler handleGetAllResolved = (ctx) -> {
+        if(ctx.req.getSession().getAttribute("role_id") == null){
+            ctx.status(403);
+            ctx.result("Must be logged in to view your requests");
+        }else {
+            List<Reimbursement> allResolved = rServ.getAllResolvedRequests();
+            ctx.status(200);
+            ctx.result(om.writeValueAsString(allResolved));
+        }
+    };
+
+    public Handler handleGetAllRequestsByEmployee = (ctx) -> {
+        int userId = Integer.parseInt(ctx.pathParam("id"));
+        if(ctx.req.getSession().getAttribute("role_id") == null){
+            ctx.status(403);
+            ctx.result("Must be logged in to view requests");
+        }else {
+            List<Reimbursement> allRequests = rServ.getAllReimbursementsByEmployee(userId);
+            ctx.status(200);
+            ctx.result(om.writeValueAsString(allRequests));
+        }
     };
 
 

@@ -94,7 +94,6 @@ public class ReimbursementServiceTest {
         List<Reimbursement> employeeReimbursements = new ArrayList<>();
         employeeReimbursements.add(new Reimbursement(100, d, "Hotel room", 1, 1, 3));
 
-
         when(rd.getAllReimbursementsByEmployee(1)).thenReturn(employeeReimbursements);
 
         int id = 1;
@@ -102,6 +101,30 @@ public class ReimbursementServiceTest {
         List<Reimbursement> returnedList = rs.getAllReimbursementsByEmployee(id);
 
         assertEquals(employeeReimbursements, returnedList);
+    }
+
+    @Test
+    public void getAllPendingByUserTest(){
+        List<Reimbursement> pendingList = new ArrayList<>();
+        pendingList.add(new Reimbursement(100, d, "Hotel room", 1, 1, 3));
+
+        when(rd.getAllPendingRequestsByEmployee(1)).thenReturn(pendingList);
+
+        List<Reimbursement> returnedList = rs.getAllPendingByUser(1);
+
+        assertEquals(pendingList, returnedList);
+    }
+
+    @Test
+    public void getAllResolvedByUserTest(){
+        List<Reimbursement> resolvedList = new ArrayList<>();
+        resolvedList.add(new Reimbursement(100, d, "Hotel room", 1, 2, 3));
+
+        when(rd.getAllResolvedRequestsByEmployee(1)).thenReturn(resolvedList);
+
+        List<Reimbursement> returnedList = rs.getAllResolvedByUser(1);
+
+        assertEquals(resolvedList, returnedList);
     }
 
     @Test
@@ -122,7 +145,8 @@ public class ReimbursementServiceTest {
 
         doNothing().when(rd).resolveReimbursement(any());
 
-        ReimbursementResolver rr = new ReimbursementResolver(1, 1,2);
+        ReimbursementResolver rr = new ReimbursementResolver(1,2);
+        rr.setResolverId(1);
 
         rs.resolveReimbursement(rr);
 

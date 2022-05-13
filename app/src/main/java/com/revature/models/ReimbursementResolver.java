@@ -9,19 +9,14 @@ public class ReimbursementResolver {
     public ReimbursementResolver() {
     }
 
-    public ReimbursementResolver(int resolverId, int reimbursementId, int status) {
-        this.resolverId = resolverId;
+    public ReimbursementResolver(int reimbursementId, int status) {
         this.reimbursementId = reimbursementId;
         this.status = status;
     }
 
-
-    public int getReimbursementId() {
-        return reimbursementId;
-    }
-
-    public void setReimbursementId(int reimbursementId) {
+    public ReimbursementResolver(int resolverId, int reimbursementId, int status) {
         this.reimbursementId = reimbursementId;
+        this.status = status;
     }
 
 
@@ -40,6 +35,16 @@ public class ReimbursementResolver {
         this.resolverId = resolverId;
     }
 
+    public int getReimbursementId() {
+        return reimbursementId;
+    }
+
+    public void setReimbursementId(int reimbursementId) {
+        this.reimbursementId = reimbursementId;
+    }
+
+
+
     @Override
     public String toString() {
         return "ReimbursementResolver{" +
@@ -48,4 +53,5 @@ public class ReimbursementResolver {
                 ", status=" + status +
                 '}';
     }
+
 }
