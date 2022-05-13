@@ -4,6 +4,7 @@ import com.revature.dao.IReimbursementDao;
 import com.revature.dao.IUserDao;
 import com.revature.exceptions.InvalidAmountException;
 import com.revature.models.Reimbursement;
+import com.revature.models.ReimbursementCreator;
 import com.revature.models.ReimbursementResolver;
 import com.revature.models.User;
 import com.revature.services.ReimbursementService;
@@ -43,7 +44,9 @@ public class ReimbursementServiceTest {
 
         doNothing().when(rd).createReimbursement(any());
 
-        rs.createReimbursement(100, d, "Hotel room", 1, 1, 3);
+        ReimbursementCreator rc = new ReimbursementCreator(100,"Hotel room", 3);
+
+        rs.createReimbursement(rc, 1);
 
         verify(rd).createReimbursement(any());
 
@@ -51,10 +54,11 @@ public class ReimbursementServiceTest {
 
     @Test(expected = InvalidAmountException.class)
     public void createReimbursementInvalidAmount() throws InvalidAmountException {
+        ReimbursementCreator rc = new ReimbursementCreator(-500,"Hotel room", 3);
 
         doNothing().when(rd).createReimbursement(any());
 
-        rs.createReimbursement(-500, d, "Hotel room", 1, 1, 3);
+        rs.createReimbursement(rc, 1);
     }
 
     @Test
@@ -118,7 +122,7 @@ public class ReimbursementServiceTest {
 
         doNothing().when(rd).resolveReimbursement(any());
 
-        ReimbursementResolver rr = new ReimbursementResolver(1,2,2);
+        ReimbursementResolver rr = new ReimbursementResolver(1, 1,2);
 
         rs.resolveReimbursement(rr);
 

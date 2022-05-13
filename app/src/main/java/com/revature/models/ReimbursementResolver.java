@@ -1,18 +1,20 @@
 package com.revature.models;
 
 public class ReimbursementResolver {
-    private int reimbursementId;
+
     private int resolverId;
+    private int reimbursementId;
     private int status;
 
     public ReimbursementResolver() {
     }
 
-    public ReimbursementResolver(int reimbursementId, int resolverId, int status) {
-        this.reimbursementId = reimbursementId;
+    public ReimbursementResolver(int resolverId, int reimbursementId, int status) {
         this.resolverId = resolverId;
+        this.reimbursementId = reimbursementId;
         this.status = status;
     }
+
 
     public int getReimbursementId() {
         return reimbursementId;
@@ -22,13 +24,6 @@ public class ReimbursementResolver {
         this.reimbursementId = reimbursementId;
     }
 
-    public int getResolverId() {
-        return resolverId;
-    }
-
-    public void setResolverId(int resolverId) {
-        this.resolverId = resolverId;
-    }
 
     public int getStatus() {
         return status;
@@ -37,12 +32,19 @@ public class ReimbursementResolver {
     public void setStatus(int status) {
         this.status = status;
     }
+    public int getResolverId() {
+        return resolverId;
+    }
+
+    public void setResolverId(int resolverId) {
+        this.resolverId = resolverId;
+    }
 
     @Override
     public String toString() {
         return "ReimbursementResolver{" +
-                "reimbursementId=" + reimbursementId +
-                ", resolverId=" + resolverId +
+                "resolverId=" + resolverId +
+                ", reimbursementId=" + reimbursementId +
                 ", status=" + status +
                 '}';
     }

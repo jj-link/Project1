@@ -24,7 +24,8 @@ public class UserController {
         //check to see if username or email is already taken
         boolean isTaken = false;
         for (User currentUser: uServ.getAllUsers()){
-            if((u.getUsername() == currentUser.getUsername() || (u.getEmail() == currentUser.getEmail()))){
+            //System.out.println("inside user loop");
+            if((u.getUsername().equals(currentUser.getUsername())) || (u.getEmail().equals(currentUser.getEmail()))){
                 isTaken = true;
             }
         }
@@ -46,6 +47,7 @@ public class UserController {
             ctx.result("Email or password incorrect");
         } else {
             //logged in successfully, set up session
+            ctx.req.getSession().setAttribute("user_id", u.getUser_id());
             ctx.req.getSession().setAttribute("username", u.getUsername());
             ctx.req.getSession().setAttribute("role_id", u.getRole_id());
             ctx.status(200);
@@ -54,6 +56,7 @@ public class UserController {
     };
 
     public Handler handleLogout = (ctx) ->{
+        ctx.req.getSession().setAttribute("user_id", null);
         ctx.req.getSession().setAttribute("username", null);
         ctx.req.getSession().setAttribute("role_id", null);
         ctx.status(205);
@@ -61,19 +64,27 @@ public class UserController {
     };
 
     public Handler handleGetAllUsers = (ctx) ->{
-        /*
-        User u = uServ.getUserByEmailOrUSername;
-        if(ctx.req.getSession().getAttribute("role_id") == ){
-        }
-         */
-        List<User> allUsers = uServ.getAllUsers();
-        ctx.status(200);
 
+        List<User> userList = uServ.getAllUsers();
+        if((ctx.req.getSession().getAttribute("role_id") == null) ||
+                (ctx.req.getSession().getAttribute("role_id").equals(2))) {
+
+            ctx.status(403);
+            ctx.result("Must be logged in as Manager to view all accounts");
+        } else if (ctx.req.getSession().getAttribute("role_id").equals(1)){
+
+            List<User> allUsers = uServ.getAllUsers();
+            ctx.status(200);
+            ctx.result("" + userList);
+        } else{
+            ctx.status(404);
+            ctx.result("You did something weird");
+        }
     };
 
     public Handler handleUpdateUser = (ctx) ->{
         User u = om.readValue(ctx.body(), User.class);
-        if(ctx.req.getSession().getAttribute("username") == u.getUsername()){
+        if(ctx.req.getSession().getAttribute("username").equals(u.getUsername())){
             u = uServ.updateUserInfo(u);
             ctx.status(200);
             ctx.result("User info updated successfully");

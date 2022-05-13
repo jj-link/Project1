@@ -3,6 +3,8 @@
  */
 package com.revature;
 
+import com.revature.controllers.ReimbursementController;
+import com.revature.controllers.UserController;
 import com.revature.dao.*;
 import com.revature.models.Reimbursement;
 import com.revature.models.ReimbursementResolver;
@@ -12,24 +14,66 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.services.ReimbursementService;
+import com.revature.services.UserService;
 import io.javalin.Javalin;
+
+import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class Driver {
 
     private static final IUserDao uDao = new UserDaoJDBC();
+    private static final UserService uServ = new UserService(uDao);
     private static final IReimbursementDao rDao = new ReimbursementDaoJDBC();
-
+    private static final ReimbursementService rServ = new ReimbursementService(rDao);
 
     public static void main(String[] args) {
+
+
+        UserController uc = new UserController(uServ);
+        ReimbursementController rc = new ReimbursementController(rServ);
+
+
+        // configure Javalin server
+        Javalin server = Javalin.create(config -> {
+            config.enableCorsForAllOrigins();
+        });
+
+        server.before(ctx -> ctx.header("Access-Control-Allow-Credentials", "true"));
+        server.before(ctx -> ctx.header("Access-Control-Expose-Headers", "*"));
+
+        server.routes(() ->{
+            path("users", () -> {
+                post("/register", uc.handleRegister);
+                post("/login", uc.handleLogin);
+                delete("/logout", uc.handleLogout);
+                get("/getAllUsers", uc.handleGetAllUsers);
+                post("/update", uc.handleUpdateUser);
+                //delete("/deleteUser{id}", uc.handleDeleteUser);
+            });
+            path("reimbursements", () -> {
+                post("/createRequest", rc.handleCreateRequest);
+            });
+
+
+        });
+        server.start(8000);
+
+    }
+
+
+
+
+
+        /*
 
         User FinanceManager = new User("jj_link", "Joseph", "Link", "jj_link@email.com", "password", 1);
         uDao.createUser(FinanceManager);
 
-        /*
         User createEmployee = new User("j_doe", "John", "Doe", "jdoe@email.com", "pa$$word", 2);
         uDao.createUser(createEmployee);
 
-         */
+
 
         User fm = uDao.getUserByEmailOrUsername("jj_link");
         System.out.println("Testing get user by userNameorEmail:  " + fm.toString());
@@ -91,4 +135,5 @@ public class Driver {
         rDao.deleteReimbursement(1);
 
     }
+         */
 }

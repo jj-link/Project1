@@ -3,9 +3,11 @@ package com.revature.services;
 import com.revature.dao.IReimbursementDao;
 import com.revature.exceptions.InvalidAmountException;
 import com.revature.models.Reimbursement;
+import com.revature.models.ReimbursementCreator;
 import com.revature.models.ReimbursementResolver;
 
 import java.sql.Date;
+import java.time.Instant;
 import java.util.List;
 
 public class ReimbursementService {
@@ -14,11 +16,11 @@ public class ReimbursementService {
 
     public ReimbursementService(IReimbursementDao rd) {this.rd=rd;}
 
-    public void createReimbursement(double amount, Date submittedDate, String Description, int reimbursementAuthor,
-                                    int reimbursementStatus, int reimbursementType) throws InvalidAmountException {
+    public void createReimbursement(ReimbursementCreator rc, int reimbursementAuthor) throws InvalidAmountException {
+        Date d = new Date(Instant.now().toEpochMilli());
 
-        Reimbursement r = new Reimbursement(amount, submittedDate, Description, reimbursementAuthor, reimbursementStatus, reimbursementType);
-        if(amount <= 0){
+        Reimbursement r = new Reimbursement(rc.getAmount(), d, rc.getDescription(), reimbursementAuthor, 1, rc.getReimbursementType());
+        if(rc.getAmount() <= 0){
             throw new InvalidAmountException();
         } else{
             rd.createReimbursement(r);
