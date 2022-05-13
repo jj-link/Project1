@@ -2,6 +2,7 @@ package com.revature.service;
 
 import com.revature.dao.IUserDao;
 import com.revature.exceptions.LoginInfoIncorrectException;
+import com.revature.models.LoginObject;
 import com.revature.models.User;
 import com.revature.services.UserService;
 import org.junit.*;
@@ -61,8 +62,8 @@ public class UserServiceTest {
         //return the precreated user above
         when(ud.getUserByEmailOrUsername(any())).thenReturn(u);
 
-
-        User loggedIn = us.loginUser("username123", "password");
+        LoginObject lo = new LoginObject("username123", "password");
+        User loggedIn = us.loginUser(lo);
         verify(ud).getUserByEmailOrUsername(any());
 
         //AssertEquals takes in three values
@@ -72,21 +73,33 @@ public class UserServiceTest {
     }
 
     @Test(expected=LoginInfoIncorrectException.class)
-    public void wrongUsernameTest() throws LoginInfoIncorrectException{
+    public void LoginWrongUsername() throws LoginInfoIncorrectException{
         User u = null;
 
         when(ud.getUserByEmailOrUsername(any())).thenReturn(u);
 
-        User loggedIn = us.loginUser("wrong", "password");
+        User loggedIn = us.loginUser(new LoginObject("wrong", "password"));
     }
 
     @Test(expected=LoginInfoIncorrectException.class)
-    public void wrongPasswordTest() throws LoginInfoIncorrectException {
+    public void LoginWrongPassword() throws LoginInfoIncorrectException {
         User u = new User("test", "John", "Doe", "test@mail.com", "password",2);
 
         when(ud.getUserByEmailOrUsername(any())).thenReturn(u);
 
-        User loggedIn = us.loginUser("test", "wrong");
+        User loggedIn = us.loginUser(new LoginObject("test", "wrong"));
+    }
+
+    @Test
+    public void getUserByEmailOrUsername(){
+
+        User u = new User("username123", "John", "Doe", "test@mail.com", "password",2);
+
+        when(ud.getUserByEmailOrUsername(any())).thenReturn(u);
+
+        User returnedUser = us.getUserByEmailOrUsername(u.getUsername());
+
+        assertEquals(u, returnedUser);
     }
 
     @Test

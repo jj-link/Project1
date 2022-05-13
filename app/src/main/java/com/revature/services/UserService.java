@@ -2,6 +2,7 @@ package com.revature.services;
 
 import com.revature.dao.IUserDao;
 import com.revature.exceptions.LoginInfoIncorrectException;
+import com.revature.models.LoginObject;
 import com.revature.models.User;
 
 import java.util.List;
@@ -19,16 +20,20 @@ public class UserService {
         ud.createUser(register);
     }
 
-    public User loginUser(String emailOrUsername, String password) throws LoginInfoIncorrectException {
-        User u = ud.getUserByEmailOrUsername(emailOrUsername);
+    public User loginUser(LoginObject lo) throws LoginInfoIncorrectException {
+        User u = ud.getUserByEmailOrUsername(lo.getEmailOrUsername());
 
-        if (u == null || !password.equals(u.getPassword())) {
+        if (u == null || !lo.getPassword().equals(u.getPassword())) {
             //LoggingUtil.logger.warn("User login attempt failed");
             throw new LoginInfoIncorrectException();
         } else {
             //LoggingUtil.logger.info("User " + u.getUsername() + " was logged in");
             return u;
         }
+    }
+
+    public User getUserByEmailOrUsername(String emailOrUsername){
+        return ud.getUserByEmailOrUsername(emailOrUsername);
     }
 
     public User updateUserInfo(User u){
