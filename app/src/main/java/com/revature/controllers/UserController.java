@@ -4,6 +4,7 @@ import com.revature.models.LoginObject;
 import com.revature.models.User;
 import com.revature.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.utils.LoggingUtil;
 import io.javalin.http.Handler;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public class UserController {
             u = uServ.loginUser(lo);
             ctx.req.getSession().setAttribute("user_id", u.getUser_id());
             ctx.req.getSession().setAttribute("username", u.getUsername());
-            ctx.req.getSession().setAttribute("role_id", u.getRole_id());
+            ctx.req.getSession().setAttribute("role", u.getRole());
             ctx.status(200);
             ctx.result("User logged in successfully");
         }
@@ -57,7 +58,7 @@ public class UserController {
     public Handler handleLogout = (ctx) ->{
         ctx.req.getSession().setAttribute("user_id", null);
         ctx.req.getSession().setAttribute("username", null);
-        ctx.req.getSession().setAttribute("role_id", null);
+        ctx.req.getSession().setAttribute("role", null);
         ctx.status(205);
         ctx.result("User has successfully logged out");
     };
@@ -65,18 +66,19 @@ public class UserController {
     public Handler handleGetAllUsers = (ctx) ->{
 
         List<User> userList = uServ.getAllUsers();
-        if((ctx.req.getSession().getAttribute("role_id") == null) ||
-                (ctx.req.getSession().getAttribute("role_id").equals(2))) {
+        if((ctx.req.getSession().getAttribute("user_id") == null) ||
+                (ctx.req.getSession().getAttribute("role").equals("Employee"))) {
 
             ctx.status(403);
             ctx.result("Must be logged in as Manager to view all accounts");
-        } else if (ctx.req.getSession().getAttribute("role_id").equals(1)){
+        } else if (ctx.req.getSession().getAttribute("role").equals("FinanceManager")){
 
             List<User> allUsers = uServ.getAllUsers();
             ctx.status(200);
             ctx.result(om.writeValueAsString(allUsers));
         } else{
             ctx.status(404);
+            LoggingUtil.logger.warn("User has done something weird");
             ctx.result("You did something weird");
         }
     };

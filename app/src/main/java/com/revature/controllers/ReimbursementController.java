@@ -23,7 +23,7 @@ public class ReimbursementController {
 
         ReimbursementCreator rc = om.readValue(ctx.body(), ReimbursementCreator.class);
 
-        if(ctx.req.getSession().getAttribute("role_id") == null){
+        if(ctx.req.getSession().getAttribute("user_id") == null){
             ctx.status(403);
             ctx.result("Must be logged in to create request");
         }
@@ -43,13 +43,13 @@ public class ReimbursementController {
     public Handler handleResolveRequest = (ctx) -> {
 
         ReimbursementResolver rr = om.readValue(ctx.body(), ReimbursementResolver.class);
-        if((ctx.req.getSession().getAttribute("role_id") == null) ||
-                (ctx.req.getSession().getAttribute("role_id").equals(2))) {
+        if((ctx.req.getSession().getAttribute("user_id") == null) ||
+                (ctx.req.getSession().getAttribute("role").equals("Employee"))) {
 
             ctx.status(403);
             ctx.result("Must be logged in as Manager to resolve reimbursement request");
 
-        } else if (ctx.req.getSession().getAttribute("role_id").equals(1)){
+        } else if (ctx.req.getSession().getAttribute("role").equals("FinanceManager")){
 
             int resolverId = (int) ctx.req.getSession().getAttribute("user_id");
             rr.setResolverId(resolverId);
@@ -61,7 +61,7 @@ public class ReimbursementController {
     };
 
     public Handler handleGetAllPendingByUser = (ctx) -> {
-        if(ctx.req.getSession().getAttribute("role_id") == null){
+        if(ctx.req.getSession().getAttribute("user_id") == null){
             ctx.status(403);
             ctx.result("Must be logged in to view your requests");
         }else {
@@ -73,7 +73,7 @@ public class ReimbursementController {
     };
 
     public Handler handleGetAllResolvedByUser = (ctx) -> {
-        if(ctx.req.getSession().getAttribute("role_id") == null){
+        if(ctx.req.getSession().getAttribute("user_id") == null){
             ctx.status(403);
             ctx.result("Must be logged in to view your requests");
         }else {
@@ -85,7 +85,7 @@ public class ReimbursementController {
     };
 
     public Handler handleGetAllPending = (ctx) -> {
-        if (ctx.req.getSession().getAttribute("role_id") == null) {
+        if (ctx.req.getSession().getAttribute("user_id") == null) {
             ctx.status(403);
             ctx.result("Must be logged in to view your requests");
         } else {
@@ -96,7 +96,7 @@ public class ReimbursementController {
     };
 
     public Handler handleGetAllResolved = (ctx) -> {
-        if(ctx.req.getSession().getAttribute("role_id") == null){
+        if(ctx.req.getSession().getAttribute("user_id") == null){
             ctx.status(403);
             ctx.result("Must be logged in to view your requests");
         }else {
@@ -108,7 +108,7 @@ public class ReimbursementController {
 
     public Handler handleGetAllRequestsByEmployee = (ctx) -> {
         int userId = Integer.parseInt(ctx.pathParam("id"));
-        if(ctx.req.getSession().getAttribute("role_id") == null){
+        if(ctx.req.getSession().getAttribute("user_id") == null){
             ctx.status(403);
             ctx.result("Must be logged in to view requests");
         }else {
