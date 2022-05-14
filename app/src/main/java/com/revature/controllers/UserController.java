@@ -24,7 +24,6 @@ public class UserController {
         //check to see if username or email is already taken
         boolean isTaken = false;
         for (User currentUser: uServ.getAllUsers()){
-            //System.out.println("inside user loop");
             if((u.getUsername().equals(currentUser.getUsername())) || (u.getEmail().equals(currentUser.getEmail()))){
                 isTaken = true;
             }
@@ -40,13 +39,13 @@ public class UserController {
 
     public Handler handleLogin = (ctx) -> {
         LoginObject lo = om.readValue(ctx.body(), LoginObject.class);
-        User u = uServ.loginUser(lo);
-
-        if(u==null){
+        User u = uServ.getUserByEmailOrUsername(lo.getEmailOrUsername());
+        if(u == null || !lo.getPassword().equals(u.getPassword())){
             ctx.status(403);
-            ctx.result("Email or password incorrect");
+            ctx.result("Email/Username or password incorrect");
         } else {
             //logged in successfully, set up session
+            u = uServ.loginUser(lo);
             ctx.req.getSession().setAttribute("user_id", u.getUser_id());
             ctx.req.getSession().setAttribute("username", u.getUsername());
             ctx.req.getSession().setAttribute("role_id", u.getRole_id());

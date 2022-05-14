@@ -5,6 +5,7 @@ import com.revature.exceptions.InvalidAmountException;
 import com.revature.models.Reimbursement;
 import com.revature.models.ReimbursementCreator;
 import com.revature.models.ReimbursementResolver;
+import com.revature.utils.LoggingUtil;
 
 import java.sql.Date;
 import java.time.Instant;
@@ -23,6 +24,7 @@ public class ReimbursementService {
         if(rc.getAmount() <= 0){
             throw new InvalidAmountException();
         } else{
+            LoggingUtil.logger.info("New reimbursement request submitted by user "+reimbursementAuthor);
             rd.createReimbursement(r);
         }
     }
@@ -52,6 +54,7 @@ public class ReimbursementService {
     }
 
     public void resolveReimbursement(ReimbursementResolver rr){
+        LoggingUtil.logger.info("User " + rr.getResolverId() + " has resolved reimbursement " + rr.getReimbursementId());
         rd.resolveReimbursement(rr);
     }
 

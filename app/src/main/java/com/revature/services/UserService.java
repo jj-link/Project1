@@ -4,6 +4,7 @@ import com.revature.dao.IUserDao;
 import com.revature.exceptions.LoginInfoIncorrectException;
 import com.revature.models.LoginObject;
 import com.revature.models.User;
+import com.revature.utils.LoggingUtil;
 
 import java.util.List;
 
@@ -18,16 +19,17 @@ public class UserService {
     public void registerUser(String username, String firstName, String lastName, String email, String password, int role_id){
         User register = new User(username, firstName, lastName, email, password, role_id);
         ud.createUser(register);
+        LoggingUtil.logger.info("User " + register.getUsername() + " has registered an account");
     }
 
     public User loginUser(LoginObject lo) throws LoginInfoIncorrectException {
         User u = ud.getUserByEmailOrUsername(lo.getEmailOrUsername());
 
         if (u == null || !lo.getPassword().equals(u.getPassword())) {
-            //LoggingUtil.logger.warn("User login attempt failed");
+            LoggingUtil.logger.warn("User login attempt failed");
             throw new LoginInfoIncorrectException();
         } else {
-            //LoggingUtil.logger.info("User " + u.getUsername() + " was logged in");
+            LoggingUtil.logger.info("User " + u.getUsername() + " was logged in");
             return u;
         }
     }
