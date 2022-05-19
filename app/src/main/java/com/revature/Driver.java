@@ -49,6 +49,7 @@ public class Driver {
                 delete("/logout", uc.handleLogout);
                 get("/getAllUsers", uc.handleGetAllUsers);
                 post("/update", uc.handleUpdateUser);
+                get("/myInfo", uc.handleGetMyInfo);
                 //delete("/deleteUser{id}", uc.handleDeleteUser);
             });
             path("reimbursements", () -> {

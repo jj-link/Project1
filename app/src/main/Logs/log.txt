@@ -2,3 +2,27 @@
 2022-05-14 14:08:26 INFO  LoggingUtil:32 - User jj_link was logged in
 2022-05-14 14:10:27 INFO  LoggingUtil:32 - User jj_link was logged in
 2022-05-14 14:10:30 INFO  LoggingUtil:57 - User 1 has resolved reimbursement 8
+2022-05-15 14:09:32 INFO  LoggingUtil:22 - User big_chungus has registered an account
+2022-05-15 14:09:44 INFO  LoggingUtil:22 - User big_chungus has registered an account
+2022-05-15 14:11:03 INFO  LoggingUtil:22 - User big_chungus has registered an account
+2022-05-15 14:12:48 INFO  LoggingUtil:22 - User big_chungus has registered an account
+2022-05-15 14:18:07 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-15 14:18:11 INFO  LoggingUtil:27 - New reimbursement request submitted by user 1
+2022-05-15 14:18:58 INFO  LoggingUtil:27 - New reimbursement request submitted by user 1
+2022-05-16 11:53:24 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-16 11:55:02 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-16 12:40:03 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-16 12:47:54 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-16 12:49:42 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-16 12:50:50 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-16 12:52:56 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-16 12:54:18 INFO  LoggingUtil:27 - New reimbursement request submitted by user 1
+2022-05-16 17:18:55 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-17 15:34:32 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-17 15:34:32 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-17 15:34:35 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-17 15:35:02 INFO  LoggingUtil:27 - New reimbursement request submitted by user 1
+2022-05-17 15:38:13 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-19 12:11:00 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-19 14:27:34 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-19 14:29:38 INFO  LoggingUtil:32 - User big_chungus was logged in

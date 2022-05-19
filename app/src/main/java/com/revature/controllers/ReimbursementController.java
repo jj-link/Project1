@@ -85,9 +85,11 @@ public class ReimbursementController {
     };
 
     public Handler handleGetAllPending = (ctx) -> {
-        if (ctx.req.getSession().getAttribute("user_id") == null) {
+        if((ctx.req.getSession().getAttribute("user_id") == null) ||
+                (ctx.req.getSession().getAttribute("role").equals("Employee"))) {
+
             ctx.status(403);
-            ctx.result("Must be logged in to view your requests");
+            ctx.result("Must be logged in as Manager to view all pending reimbursement requests");
         } else {
             List<Reimbursement> allPending = rServ.getAllPendingRequests();
             ctx.status(200);
@@ -96,9 +98,11 @@ public class ReimbursementController {
     };
 
     public Handler handleGetAllResolved = (ctx) -> {
-        if(ctx.req.getSession().getAttribute("user_id") == null){
+        if((ctx.req.getSession().getAttribute("user_id") == null) ||
+                (ctx.req.getSession().getAttribute("role").equals("Employee"))) {
+
             ctx.status(403);
-            ctx.result("Must be logged in to view your requests");
+            ctx.result("Must be logged in as Manager to view all resolved reimbursement requests");
         }else {
             List<Reimbursement> allResolved = rServ.getAllResolvedRequests();
             ctx.status(200);
