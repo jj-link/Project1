@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import com.revature.models.LoginObject;
+import com.revature.models.ReimbursementResolver;
 import com.revature.models.User;
 import com.revature.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -84,28 +85,38 @@ public class UserController {
     };
 
     public Handler handleUpdateUser = (ctx) ->{
-        User u = om.readValue(ctx.body(), User.class);
+        User currentInfo = uServ.getUserByEmailOrUsername((String)ctx.req.getSession().getAttribute("username"));
         if(ctx.req.getSession().getAttribute("username") == null ||
-                !ctx.req.getSession().getAttribute("username").equals(u.getUsername())) {
+                !ctx.req.getSession().getAttribute("username").equals(currentInfo.getUsername())) {
             ctx.status(401);
             ctx.result("You must be logged in as the correct user to update user info");
         }
-        else if(ctx.req.getSession().getAttribute("username").equals(u.getUsername())){
+        else if(ctx.req.getSession().getAttribute("username").equals(currentInfo.getUsername())){
+            User u = om.readValue(ctx.body(), User.class);
             u = uServ.updateUserInfo(u);
             ctx.status(200);
             ctx.result("User info updated successfully");
         }
     };
 
+    /*
     public Handler handleGetMyInfo = (ctx) ->{
         if(ctx.req.getSession().getAttribute("user_id") == null){
             ctx.status(403);
             ctx.result("Must be logged in to view your requests");
         }else {
             User u = uServ.getUserByEmailOrUsername((String) ctx.req.getSession().getAttribute("username"));
-            ctx.status(200);
-            ctx.result(om.writeValueAsString(u));
+            if( !ctx.req.getSession().getAttribute("username").equals(u.getUsername())) {
+                ctx.status(403);
+                ctx.result("You must be logged in as the correct user to update user info");
+            }
+            else {
+                ctx.status(200);
+                ctx.result(om.writeValueAsString(u));
+            }
         }
     };
+
+     */
     
 }

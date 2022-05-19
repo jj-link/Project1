@@ -26,3 +26,9 @@
 2022-05-19 12:11:00 INFO  LoggingUtil:32 - User big_chungus was logged in
 2022-05-19 14:27:34 INFO  LoggingUtil:32 - User big_chungus was logged in
 2022-05-19 14:29:38 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-19 16:00:30 INFO  LoggingUtil:22 - User testuser has registered an account
+2022-05-19 16:00:38 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-19 16:08:35 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-19 16:35:37 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-19 16:37:58 INFO  LoggingUtil:32 - User big_chungus was logged in
+2022-05-19 16:43:16 INFO  LoggingUtil:32 - User big_chungus was logged in
