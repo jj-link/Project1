@@ -108,7 +108,8 @@ public class UserDaoJDBC implements IUserDao{
 
             p.execute();
 
-            return u;
+            User updatedUser = new User(u.getUser_id(), u.getUsername(), u.getFirstName(),u.getLastName(),u.getEmail(),u.getPassword(),u.getRole_id());
+            return updatedUser;
         } catch(SQLException e) {
             e.printStackTrace();
             return null;
