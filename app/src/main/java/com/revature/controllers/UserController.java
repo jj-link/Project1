@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.dao.IUserDao;
 import com.revature.models.LoginObject;
 import com.revature.models.ReimbursementResolver;
 import com.revature.models.User;
@@ -95,14 +96,21 @@ public class UserController {
             User u = om.readValue(ctx.body(), User.class);
             u = uServ.updateUserInfo(u);
             ctx.status(200);
-            ctx.result("User info updated successfully");
+            ctx.result(om.writeValueAsString(u));
+        }
+    };
+
+    public Handler handleVerifyLogin = (ctx) ->{
+        if(ctx.req.getSession().getAttribute("username") == null){
+            ctx.status(403);
+        } else{
+            User u = uServ.getUserByEmailOrUsername((String)ctx.req.getSession().getAttribute("username"));
+            ctx.result(om.writeValueAsString(u));
         }
     };
 
     /*
     public Handler handleGetMyInfo = (ctx) ->{
-        if(ctx.req.getSession().getAttribute("user_id") == null){
-            ctx.status(403);
             ctx.result("Must be logged in to view your requests");
         }else {
             User u = uServ.getUserByEmailOrUsername((String) ctx.req.getSession().getAttribute("username"));
