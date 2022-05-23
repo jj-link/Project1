@@ -37,3 +37,60 @@
 2022-05-20 16:26:33 INFO  LoggingUtil:32 - User BigChungus was logged in
 2022-05-20 16:32:43 INFO  LoggingUtil:32 - User BigChungus was logged in
 2022-05-20 16:35:03 INFO  LoggingUtil:32 - User BigChungus was logged in
+2022-05-22 20:46:18 INFO  LoggingUtil:32 - User BigChungus was logged in
+2022-05-22 20:46:18 INFO  LoggingUtil:32 - User BigChungus was logged in
+2022-05-22 20:50:43 INFO  LoggingUtil:57 - User 1 has resolved reimbursement 1
+2022-05-22 20:51:00 INFO  LoggingUtil:57 - User 1 has resolved reimbursement 2
+2022-05-22 20:53:21 INFO  LoggingUtil:32 - User testuser was logged in
+2022-05-22 20:53:57 INFO  LoggingUtil:27 - New reimbursement request submitted by user 2
+2022-05-22 20:55:01 INFO  LoggingUtil:32 - User BigChungus was logged in
+2022-05-22 20:55:08 INFO  LoggingUtil:57 - User 1 has resolved reimbursement 4
+2022-05-22 20:55:55 INFO  LoggingUtil:32 - User testuser was logged in
+2022-05-22 20:58:51 INFO  LoggingUtil:22 - User RShacklefort has registered an account
+2022-05-22 21:01:38 INFO  LoggingUtil:22 - User regular_employee has registered an account
+2022-05-22 21:02:37 INFO  LoggingUtil:22 - User HHill has registered an account
+2022-05-22 21:03:30 INFO  LoggingUtil:32 - User HHill was logged in
+2022-05-22 21:04:20 INFO  LoggingUtil:32 - User regular_employee was logged in
+2022-05-22 21:04:51 INFO  LoggingUtil:27 - New reimbursement request submitted by user 4
+2022-05-22 21:07:59 INFO  LoggingUtil:27 - New reimbursement request submitted by user 4
+2022-05-22 22:01:00 INFO  LoggingUtil:32 - User HHill was logged in
+2022-05-22 22:01:41 INFO  LoggingUtil:57 - User 5 has resolved reimbursement 3
+2022-05-22 22:13:39 INFO  LoggingUtil:32 - User regular_employee was logged in
+2022-05-22 22:16:46 INFO  LoggingUtil:32 - User BigChungus was logged in
+2022-05-23 16:29:50 INFO  LoggingUtil:32 - User BigChungus was logged in
+2022-05-23 16:30:39 INFO  LoggingUtil:32 - User testuser was logged in
+2022-05-23 16:31:40 INFO  LoggingUtil:27 - New reimbursement request submitted by user 2
+2022-05-23 16:35:32 INFO  LoggingUtil:32 - User regular_employee was logged in
+2022-05-23 16:35:49 INFO  LoggingUtil:32 - User testuser was logged in
+2022-05-23 16:37:49 INFO  LoggingUtil:27 - New reimbursement request submitted by user 2
+2022-05-23 16:43:52 INFO  LoggingUtil:27 - New reimbursement request submitted by user 2
+2022-05-23 16:44:58 INFO  LoggingUtil:32 - User testuser was logged in
+2022-05-23 16:47:42 INFO  LoggingUtil:32 - User HHill was logged in
+2022-05-23 16:48:40 INFO  LoggingUtil:57 - User 5 has resolved reimbursement 5
+2022-05-23 16:52:07 INFO  LoggingUtil:57 - User 5 has resolved reimbursement 6
+2022-05-23 16:52:53 INFO  LoggingUtil:57 - User 5 has resolved reimbursement 7
+2022-05-23 16:54:27 INFO  LoggingUtil:32 - User regular_employee was logged in
+2022-05-23 16:55:20 INFO  LoggingUtil:27 - New reimbursement request submitted by user 4
+2022-05-23 16:58:12 INFO  LoggingUtil:32 - User regular was logged in
+2022-05-23 17:01:06 INFO  LoggingUtil:32 - User regular was logged in
+2022-05-23 17:01:12 INFO  LoggingUtil:32 - User regular was logged in
+2022-05-23 17:07:48 INFO  LoggingUtil:32 - User regular was logged in
+2022-05-23 17:09:11 INFO  LoggingUtil:32 - User regular was logged in
+2022-05-23 17:29:41 INFO  LoggingUtil:32 - User HHill was logged in
+2022-05-23 17:31:37 INFO  LoggingUtil:32 - User HHill was logged in
+2022-05-23 17:32:47 INFO  LoggingUtil:32 - User HHill was logged in
+2022-05-23 17:34:07 INFO  LoggingUtil:32 - User HHill was logged in
+2022-05-23 17:34:39 INFO  LoggingUtil:32 - User HHill was logged in
+2022-05-23 17:38:09 INFO  LoggingUtil:32 - User regular was logged in
+2022-05-23 17:40:06 INFO  LoggingUtil:32 - User regular was logged in
+2022-05-23 17:40:25 INFO  LoggingUtil:27 - New reimbursement request submitted by user 4
+2022-05-23 17:41:48 INFO  LoggingUtil:32 - User regular was logged in
+2022-05-23 17:42:34 INFO  LoggingUtil:27 - New reimbursement request submitted by user 4
+2022-05-23 17:45:14 INFO  LoggingUtil:32 - User regular was logged in
+2022-05-23 17:45:32 INFO  LoggingUtil:27 - New reimbursement request submitted by user 4
+2022-05-23 17:46:36 INFO  LoggingUtil:27 - New reimbursement request submitted by user 4
+2022-05-23 17:47:32 INFO  LoggingUtil:27 - New reimbursement request submitted by user 4
+2022-05-23 17:49:18 INFO  LoggingUtil:32 - User HHill was logged in
+2022-05-23 17:49:34 INFO  LoggingUtil:57 - User 5 has resolved reimbursement 14
+2022-05-23 17:58:45 INFO  LoggingUtil:32 - User regular was logged in
+2022-05-23 17:58:57 INFO  LoggingUtil:27 - New reimbursement request submitted by user 4

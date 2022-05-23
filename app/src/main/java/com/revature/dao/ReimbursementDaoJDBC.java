@@ -31,6 +31,11 @@ public class ReimbursementDaoJDBC implements IReimbursementDao{
             p.setString(3, r.getDescription());
             p.setInt(4, r.getReimbursementAuthorId());
             p.setInt(5, r.getReimbursementStatusId());
+
+            //cheat to fix frontend glitch
+            if(r.getReimbursementTypeId() == 0){
+                r.setReimbursementTypeId(1);
+            }
             p.setInt(6, r.getReimbursementTypeId());
 
             p.execute();
@@ -44,7 +49,7 @@ public class ReimbursementDaoJDBC implements IReimbursementDao{
     public List<Reimbursement> getAllPendingReimbursements() {
         Connection c = cs.getConnection();
 
-        String sql = "SELECT * from reimbursements where reimbursement_status_id = 1";
+        String sql = "SELECT * from reimbursements where reimbursement_status_id = 1 ORDER BY reimbursement_id DESC";
 
         try{
             PreparedStatement ps = c.prepareStatement(sql);
@@ -68,7 +73,7 @@ public class ReimbursementDaoJDBC implements IReimbursementDao{
     public List<Reimbursement> getAllResolvedReimbursements() {
         Connection c = cs.getConnection();
 
-        String sql = "SELECT * from reimbursements where reimbursement_status_id = 2 or reimbursement_status_id = 3";
+        String sql = "SELECT * from reimbursements where reimbursement_status_id = 2 or reimbursement_status_id = 3 ORDER BY reimbursement_id DESC";
 
         try{
             PreparedStatement ps = c.prepareStatement(sql);
@@ -92,7 +97,7 @@ public class ReimbursementDaoJDBC implements IReimbursementDao{
     public List<Reimbursement> getAllReimbursementsByEmployee(int userId) {
         Connection c = cs.getConnection();
 
-        String sql = "SELECT * from reimbursements where reimbursement_author = ?";
+        String sql = "SELECT * from reimbursements where reimbursement_author = ? ORDER BY reimbursement_id DESC";
 
         try{
             PreparedStatement ps = c.prepareStatement(sql);
@@ -118,7 +123,7 @@ public class ReimbursementDaoJDBC implements IReimbursementDao{
 
         Connection c = cs.getConnection();
 
-        String sql = "SELECT * from reimbursements where reimbursement_author = ? and reimbursement_status_id = ?";
+        String sql = "SELECT * from reimbursements where reimbursement_author = ? and reimbursement_status_id = ? ORDER BY reimbursement_id DESC";
 
         try{
             PreparedStatement ps = c.prepareStatement(sql);
@@ -145,7 +150,7 @@ public class ReimbursementDaoJDBC implements IReimbursementDao{
     public List<Reimbursement> getAllResolvedRequestsByEmployee(int userId){
         Connection c = cs.getConnection();
 
-        String sql = "SELECT * from reimbursements where reimbursement_author = ? and (reimbursement_status_id = ? or reimbursement_status_id = ?)";
+        String sql = "SELECT * from reimbursements where reimbursement_author = ? and (reimbursement_status_id = ? or reimbursement_status_id = ?) ORDER BY reimbursement_id DESC";
 
         try{
             PreparedStatement ps = c.prepareStatement(sql);
