@@ -94,3 +94,20 @@
 2022-05-23 17:49:34 INFO  LoggingUtil:57 - User 5 has resolved reimbursement 14
 2022-05-23 17:58:45 INFO  LoggingUtil:32 - User regular was logged in
 2022-05-23 17:58:57 INFO  LoggingUtil:27 - New reimbursement request submitted by user 4
+2022-05-23 18:14:41 INFO  LoggingUtil:32 - User jane_doe was logged in
+2022-05-23 18:15:12 INFO  LoggingUtil:32 - User jane_doe was logged in
+2022-05-24 09:33:09 INFO  LoggingUtil:32 - User regular was logged in
+2022-05-24 09:33:58 INFO  LoggingUtil:27 - New reimbursement request submitted by user 4
+2022-05-24 09:34:26 INFO  LoggingUtil:32 - User HHill was logged in
+2022-05-24 09:34:39 INFO  LoggingUtil:57 - User 5 has resolved reimbursement 17
+2022-05-24 09:37:51 INFO  LoggingUtil:22 - User mr_manager has registered an account
+2022-05-24 09:44:36 INFO  LoggingUtil:32 - User mr_manager was logged in
+2022-05-24 09:45:16 INFO  LoggingUtil:32 - User RShacklefort was logged in
+2022-05-24 09:45:37 INFO  LoggingUtil:27 - New reimbursement request submitted by user 3
+2022-05-24 09:46:03 INFO  LoggingUtil:27 - New reimbursement request submitted by user 3
+2022-05-24 09:53:22 INFO  LoggingUtil:32 - User regular_employee was logged in
+2022-05-24 10:32:46 INFO  LoggingUtil:32 - User regular_employee was logged in
+2022-05-24 10:52:36 INFO  LoggingUtil:32 - User regular_employee was logged in
+2022-05-24 10:54:00 INFO  LoggingUtil:27 - New reimbursement request submitted by user 4
+2022-05-24 10:56:35 INFO  LoggingUtil:32 - User mr_manager was logged in
+2022-05-24 10:58:42 INFO  LoggingUtil:57 - User 6 has resolved reimbursement 20
